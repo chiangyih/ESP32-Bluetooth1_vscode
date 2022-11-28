@@ -1,8 +1,9 @@
 #include <Arduino.h>
 #include <BluetoothSerial.h>
+
 BluetoothSerial BT;
 char val;      // 宣告存放串列埠資料字元變數
-int led=2;             //宣告led 接於 GPIO 2
+int led=15;             //宣告led 接於 GPIO 15
 void setup() 
 {
   Serial.begin(115200);
@@ -15,13 +16,14 @@ void loop()
   if (BT.available())  //判斷藍芽串列埠上是否有資料
   {
     val=BT.read();   //讀取串列資料，存放於val
+
     switch (val)
     {
       case '0':
-         digitalWrite(led,LOW);
+         digitalWrite(led,LOW);    //當收到0時，LED暗
          break;
       case '1':
-         digitalWrite(led,HIGH);
+         digitalWrite(led,HIGH);   //當收到1時，LED亮
          break;
     }
 
